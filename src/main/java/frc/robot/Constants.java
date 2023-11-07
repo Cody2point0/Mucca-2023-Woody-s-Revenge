@@ -33,7 +33,7 @@ public final class Constants {
     public static final double armP = 0;
     public static final double armI = 0;
     public static final double armD = 0;
-    public static final double armMOE = 0.01;
+    public static final double[] armPIDOutputRange = {-0.6, 0.6};
 
     //Gyro Constants
     public static final double gyro_kP = .005;
@@ -44,4 +44,14 @@ public final class Constants {
 
   }
   
+  public static class miscConstants {
+    //misc Bool
+
+
+    //misc Int
+
+
+
+    //idk continue the comments
+  }
 }
