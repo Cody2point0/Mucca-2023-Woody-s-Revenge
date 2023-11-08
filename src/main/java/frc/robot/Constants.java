@@ -21,6 +21,7 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
     public static final int kOpControllerPort = 1;
+    public static final double[] kOpDeadband = {-0.1, 0.1};
   }
 
   public static class motorConstants {
@@ -35,10 +36,6 @@ public final class Constants {
 
     //armMotor
     public static final int armMotorId = 1;
-    public static final double armP = 0;
-    public static final double armI = 0;
-    public static final double armD = 0;
-    public static final double[] armPIDOutputRange = {-0.6, 0.6};
 
     //Gyro Constants
     public static final double gyro_kP = .005;
