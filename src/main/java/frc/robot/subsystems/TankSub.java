@@ -8,8 +8,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import java.lang.invoke.LambdaConversionException;
 
 
 public class TankSub extends SubsystemBase {
@@ -36,7 +41,6 @@ public class TankSub extends SubsystemBase {
 
     //backRight TalonSRX follows the outputs given to frontRight TalonSRX
     backRight.follow(frontRight);
-
 
   }
   @Override
