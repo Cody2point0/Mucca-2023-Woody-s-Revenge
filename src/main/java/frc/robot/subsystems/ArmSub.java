@@ -31,6 +31,7 @@ public class ArmSub extends SubsystemBase {
 
   Compressor armCompressor;
   static DoubleSolenoid piston;
+  static boolean solenoidIsExtended;
 
 
 
@@ -70,15 +71,18 @@ public class ArmSub extends SubsystemBase {
   @Override
   public void periodic() {
       SmartDashboard.putNumber("EncoderPosition", encoder.getPosition());
+      SmartDashboard.putBoolean("IsPistonExtended", solenoidIsExtended);
     //this method will be called once per scheduler run
   }
 
   public static void EFPICKUP () {
     piston.set(DoubleSolenoid.Value.kReverse);
+    solenoidIsExtended = false;
   }
 
   public static void EFDROP () {
     piston.set(DoubleSolenoid.Value.kForward);
+    solenoidIsExtended = true;
   }
 
   public void setArmPosition(double direct) {
