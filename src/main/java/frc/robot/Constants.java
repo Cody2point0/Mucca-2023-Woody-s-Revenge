@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.PowerDistribution;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -16,6 +20,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOpControllerPort = 1;
   }
 
   public static class motorConstants {
@@ -53,5 +58,8 @@ public final class Constants {
 
 
     //idk continue the comments
+  }
+  public static class pneumatics {
+    public static final PneumaticsModuleType pcm = PneumaticsModuleType.CTREPCM;
   }
 }
