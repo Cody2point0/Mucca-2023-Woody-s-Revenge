@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.TankSub;
+import frc.robot.subsystems.ArmSub;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -23,7 +25,7 @@ public class RobotContainer {
   private final TankSub m_DriveTrain = new TankSub();
   // creates a new xboxController object
   private final XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort);
-
+  CommandXboxController m_opController = new CommandXboxController(OperatorConstants.kOpControllerPort);
 
     //creates RunCommand named driveCommand that takes the drive method from TankSub and sets the double parameters to the value of joystick controller
     RunCommand driveCommand = new RunCommand(()-> m_DriveTrain.drive(m_driverController.getLeftY(), m_driverController.getRightX()), m_DriveTrain);
@@ -35,6 +37,11 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+
+    m_opController.a().onTrue(new InstantCommand(ArmSub::EFPICKUP));
+    m_opController.b().onTrue(new InstantCommand(ArmSub::EFDROP));
+
+
   }
 
   /**
@@ -49,6 +56,7 @@ public class RobotContainer {
   private void configureBindings() {
    //sets the defualt command to driveCommand, it will run constantly
      m_DriveTrain.setDefaultCommand(driveCommand);
+
      
 
 
