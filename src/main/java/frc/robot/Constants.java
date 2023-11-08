@@ -4,10 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.PowerDistribution;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -45,18 +42,10 @@ public final class Constants {
     
 
   }
-  
-  public static class miscConstants {
-    //misc Bool
 
-
-    //misc Int
-
-
-
-    //idk continue the comments
-  }
-  public static class pneumatics {
+  public static class pneumaticsConstants {
+    //REVPH is the long PCM that has REV Robotics branding on it
+    //CTREPCM is the other PCM
     public static final PneumaticsModuleType pcm = PneumaticsModuleType.CTREPCM;
   }
 }

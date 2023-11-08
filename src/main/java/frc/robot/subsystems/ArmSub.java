@@ -4,31 +4,22 @@
 
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.motorConstants;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import frc.robot.RobotContainer;
 
 public class ArmSub extends SubsystemBase {
 
+  //motor
   CANSparkMax motor;
   SparkMaxAbsoluteEncoder encoder;
 
-
-  Compressor armCompressor;
+  //pneumatics
   static DoubleSolenoid piston;
   static boolean wantSolenoidOut;
 
@@ -46,7 +37,7 @@ public class ArmSub extends SubsystemBase {
 
 
     //pneumatics
-    piston = new DoubleSolenoid(Constants.pneumatics.pcm, 1, 2);
+    piston = new DoubleSolenoid(Constants.pneumaticsConstants.pcm, 1, 2);
     wantSolenoidOut = false;
 
     //motor
