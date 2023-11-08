@@ -39,8 +39,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_opController.a().onTrue(new InstantCommand(ArmSub::EFPICKUP));
-    m_opController.b().onTrue(new InstantCommand(ArmSub::EFDROP));
+    m_opController.a().onTrue(new InstantCommand(ArmSub::ToggleEF));
     arm.setArmPosition(m_opController.getLeftY());
 
 

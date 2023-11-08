@@ -26,13 +26,11 @@ public class ArmSub extends SubsystemBase {
 
   CANSparkMax motor;
   SparkMaxAbsoluteEncoder encoder;
-  SparkMaxPIDController pidController;
 
 
   Compressor armCompressor;
   static DoubleSolenoid piston;
-  static boolean solenoidIsExtended;
-
+  static boolean wantSolenoidOut;
 
 
 
@@ -46,9 +44,10 @@ public class ArmSub extends SubsystemBase {
 
 
 
+
     //pneumatics
-    armCompressor = new Compressor(Constants.pneumatics.pcm);
     piston = new DoubleSolenoid(Constants.pneumatics.pcm, 1, 2);
+    wantSolenoidOut = false;
 
     //motor
     motor = new CANSparkMax(Constants.motorConstants.armMotorId, MotorType.kBrushless);
@@ -57,32 +56,35 @@ public class ArmSub extends SubsystemBase {
     motor.setSecondaryCurrentLimit(60);
     motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-    //encoder? we don't really need it hahaha...ha.....
+    //encoder? we don't really need it haha..ha...ha.....
     encoder = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+
 
 
     //must stay at bottom
     motor.burnFlash();
-
-
-    
   }
 
   @Override
   public void periodic() {
       SmartDashboard.putNumber("EncoderPosition", encoder.getPosition());
-      SmartDashboard.putBoolean("IsPistonExtended", solenoidIsExtended);
+      SmartDashboard.putBoolean("IsPistonTryingExtend", wantSolenoidOut);
+
+      //updated controls to test for Toggle-style single button EF control
+      if (wantSolenoidOut) {EFOUT();}
+      else {EFIN();}
+
     //this method will be called once per scheduler run
   }
-
-  public static void EFPICKUP () {
+  public static void ToggleEF() {
+    wantSolenoidOut = !wantSolenoidOut;
+  }
+  public static void EFIN() {
     piston.set(DoubleSolenoid.Value.kReverse);
-    solenoidIsExtended = false;
   }
 
-  public static void EFDROP () {
+  public static void EFOUT() {
     piston.set(DoubleSolenoid.Value.kForward);
-    solenoidIsExtended = true;
   }
 
   public void setArmPosition(double direct) {
