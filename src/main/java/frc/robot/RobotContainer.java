@@ -27,6 +27,7 @@ public class RobotContainer {
   private final XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort);
   CommandXboxController m_opController = new CommandXboxController(OperatorConstants.kOpControllerPort);
 
+  ArmSub arm = new ArmSub();
     //creates RunCommand named driveCommand that takes the drive method from TankSub and sets the double parameters to the value of joystick controller
     RunCommand driveCommand = new RunCommand(()-> m_DriveTrain.drive(m_driverController.getLeftY(), m_driverController.getRightX()), m_DriveTrain);
 
@@ -40,6 +41,7 @@ public class RobotContainer {
 
     m_opController.a().onTrue(new InstantCommand(ArmSub::EFPICKUP));
     m_opController.b().onTrue(new InstantCommand(ArmSub::EFDROP));
+    arm.setArmPosition(m_opController.getLeftY());
 
 
   }
@@ -65,7 +67,7 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    
+
   }
 
   /**
