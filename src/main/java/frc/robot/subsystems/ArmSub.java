@@ -6,12 +6,11 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import com.revrobotics.SparkMaxAbsoluteEncoder;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 
 public class ArmSub extends SubsystemBase {
 
@@ -19,9 +18,7 @@ public class ArmSub extends SubsystemBase {
   CANSparkMax motor;
   SparkMaxAbsoluteEncoder encoder;
 
-  //pneumatics
-  static DoubleSolenoid piston;
-  static boolean wantSolenoidOut;
+
 
 
 
@@ -34,23 +31,16 @@ public class ArmSub extends SubsystemBase {
 
 
 
-
-
-    //pneumatics
-    piston = new DoubleSolenoid(Constants.pneumaticsConstants.pcm, 1, 2);
-    wantSolenoidOut = false;
-
     //motor
     motor = new CANSparkMax(Constants.motorConstants.armMotorId, MotorType.kBrushless);
     motor.restoreFactoryDefaults();
     motor.enableVoltageCompensation(12.0);
+    motor.setSmartCurrentLimit(40);
     motor.setSecondaryCurrentLimit(60);
     motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
     //encoder? we don't really need it haha..ha...ha.....
     encoder = motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
-
-
 
     //must stay at bottom
     motor.burnFlash();
@@ -58,29 +48,15 @@ public class ArmSub extends SubsystemBase {
 
   @Override
   public void periodic() {
-      SmartDashboard.putNumber("EncoderPosition", encoder.getPosition());
-      SmartDashboard.putBoolean("IsPistonTryingExtend", wantSolenoidOut);
-
-      //updated controls to test for Toggle-style single button EF control
-      if (wantSolenoidOut) {EFOUT();}
-      else {EFIN();}
-
     //this method will be called once per scheduler run
   }
-  public static void ToggleEF() {
-    wantSolenoidOut = !wantSolenoidOut;
-  }
-  public static void EFIN() {
-    piston.set(DoubleSolenoid.Value.kReverse);
-  }
 
-  public static void EFOUT() {
-    piston.set(DoubleSolenoid.Value.kForward);
-  }
 
-  public void setArmPosition(double direct) {
-    if (direct < Constants.OperatorConstants.kOpDeadband[0] || Constants.OperatorConstants.kOpDeadband[1] < direct) {
-      motor.set(direct);
-    }
+  public void setArmPower(double direct) {
+    if (direct < Constants.OperatorConstants.kOpDeadband[0] || Constants.OperatorConstants.kOpDeadband[1] < direct)
+      motor.set(direct * 0.1);
+    else
+      motor.set(0);
+
   }
 }
