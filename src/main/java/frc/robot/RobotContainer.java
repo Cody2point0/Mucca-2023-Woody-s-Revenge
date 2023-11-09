@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.EFSub;
 import frc.robot.subsystems.TankSub;
 import frc.robot.subsystems.ArmSub;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,8 +30,8 @@ public class RobotContainer {
   CommandXboxController m_opController = new CommandXboxController(OperatorConstants.kOpControllerPort);
 
   ArmSub arm = new ArmSub();
-    //creates RunCommand named driveCommand that takes the drive method from TankSub and sets the double parameters to the value of joystick controller
-    RunCommand driveCommand = new RunCommand(()-> m_DriveTrain.drive(m_driverController.getLeftY(), m_driverController.getRightX()), m_DriveTrain);
+  //creates RunCommand named driveCommand that takes the drive method from TankSub and sets the double parameters to the value of joystick controller
+  RunCommand driveCommand = new RunCommand(()-> m_DriveTrain.drive(m_driverController.getLeftY(), m_driverController.getRightX()), m_DriveTrain);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -39,9 +41,9 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_opController.a().onTrue(new InstantCommand(ArmSub::ToggleEF));
-    arm.setArmPosition(m_opController.getLeftY());
+    m_opController.a().onTrue(new InstantCommand(EFSub::ToggleEF));
 
+    arm.setDefaultCommand(new RunCommand(()->arm.setArmPower(m_opController.getLeftY()),arm));
 
   }
 
@@ -59,7 +61,7 @@ public class RobotContainer {
      m_DriveTrain.setDefaultCommand(driveCommand);
 
      
-
+    m_driverController.setRumble(GenericHID.RumbleType.kLeftRumble,1);
 
 
      
