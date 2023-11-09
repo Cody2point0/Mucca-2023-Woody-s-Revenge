@@ -22,17 +22,17 @@ public final class Constants {
   }
 
   public static class motorConstants {
-
+    //commented values are reversed so the actual "back" of the robot is assumed as the front, per arm placement
     //rightMotors
-    public static final int front_Right_MotorConstant = 1;
-    public static final int back_Right_MotorConstant = 1;
+    public static final int front_Right_MotorConstant = 18; //12
+    public static final int back_Right_MotorConstant = 11; //13
 
     //leftMotors
-    public static final int front_Left_MotorConstant = 1;
-    public static final int back_Left_MotorConstant = 1;
+    public static final int front_Left_MotorConstant = 13; //11
+    public static final int back_Left_MotorConstant = 12; //18
 
     //armMotor
-    public static final int armMotorId = 1;
+    public static final int armMotorId = 49;
 
     //Gyro Constants
     public static final double gyro_kP = .005;
@@ -44,8 +44,10 @@ public final class Constants {
   }
 
   public static class pneumaticsConstants {
-    //REVPH is the long PCM that has REV Robotics branding on it
-    //CTREPCM is the other PCM
+    //REVPH is the long PCM that has big REV Robotics branding on it
+    //CTREPCM is the other PCM - we use CTREPCM last checked
     public static final PneumaticsModuleType pcm = PneumaticsModuleType.CTREPCM;
+    public static final int PneumaticsForwardChannel = 1;
+    public static final int PneumaticsBackwardChannel = 2;
   }
 }
