@@ -36,10 +36,6 @@ public final class Constants {
 
     //Gyro Constants
     public static final double gyro_kP = .005;
-  
-
-
-    
 
   }
 

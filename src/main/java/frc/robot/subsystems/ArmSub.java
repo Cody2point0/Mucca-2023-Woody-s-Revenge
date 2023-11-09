@@ -18,14 +18,6 @@ public class ArmSub extends SubsystemBase {
   CANSparkMax motor;
   SparkMaxAbsoluteEncoder encoder;
 
-
-
-
-
-
-
-
-
   /** Creates a new ArmSub. */
   public ArmSub() {
 
