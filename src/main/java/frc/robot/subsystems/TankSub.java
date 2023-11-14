@@ -51,8 +51,8 @@ public class TankSub extends SubsystemBase {
   public void drive( double drive, double turn){
 
     //setting voltage output to the motor controllers in terms of percent output ( 1 = 100%, .5 = 50%)
-    frontRight.set(ControlMode.PercentOutput, (drive + turn) * .3);
-    frontLeft.set(ControlMode.PercentOutput, (drive - turn) * .3);
+    frontRight.set(ControlMode.PercentOutput, (drive + turn) * -.3);
+    frontLeft.set(ControlMode.PercentOutput, (drive - turn) * -.3);
     
   }
 
