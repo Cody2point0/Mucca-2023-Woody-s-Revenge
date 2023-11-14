@@ -47,7 +47,7 @@ public class ArmSub extends SubsystemBase {
 
   public void setArmPower(double direct) {
     if (direct < Constants.OperatorConstants.kOpDeadband[0] || Constants.OperatorConstants.kOpDeadband[1] < direct)
-      motor.set(direct * 0.1);
+      motor.set(direct * -0.17);
     else
       motor.set(0);
 

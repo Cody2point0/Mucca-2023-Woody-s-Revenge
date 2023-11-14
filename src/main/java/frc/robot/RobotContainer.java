@@ -32,7 +32,7 @@ public class RobotContainer {
   ArmSub arm = new ArmSub();
   //creates RunCommand named driveCommand that takes the drive method from TankSub and sets the double parameters to the value of joystick controller
   RunCommand driveCommand = new RunCommand(()-> m_DriveTrain.drive(m_driverController.getLeftY(), m_driverController.getRightX()), m_DriveTrain);
-
+  RunCommand ArmCommand = new RunCommand(()->arm.setArmPower(m_opController.getLeftY()),arm);
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
 
@@ -43,7 +43,7 @@ public class RobotContainer {
 
     m_opController.a().onTrue(new InstantCommand(EFSub::ToggleEF));
 
-    arm.setDefaultCommand(new RunCommand(()->arm.setArmPower(m_opController.getLeftY()),arm));
+    arm.setDefaultCommand(ArmCommand);
 
   }
 
@@ -61,7 +61,7 @@ public class RobotContainer {
      m_DriveTrain.setDefaultCommand(driveCommand);
 
      
-    m_driverController.setRumble(GenericHID.RumbleType.kLeftRumble,1);
+
 
 
      
